@@ -7,17 +7,18 @@ public class TileMap : MonoBehaviour
     public int sizeX;
     public int sizeZ;
     public float tileSize;
+    public TDMap map;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        map = new TDMap(sizeX, sizeZ);
         BuildMesh(sizeX, sizeZ, tileSize);
     }
 
 
     public void BuildMesh(int sizeX, int sizeZ, float tileSize)
     {
-        TDMap map = new TDMap(sizeX, sizeZ);
         int numTiles = sizeX * sizeZ;
         int numTris = numTiles * 2;
         
@@ -37,7 +38,7 @@ public class TileMap : MonoBehaviour
         {
             for (x = 0; x < vSizeX; x++)
             {
-                vertices[z * vSizeX + x] = new Vector3(x * tileSize, 0, z * tileSize);
+                vertices[z * vSizeX + x] = new Vector3(x * tileSize - sizeX * 0.5f, 0, z * tileSize - sizeZ * 0.5f);
                 normals[z * vSizeX + x] = Vector3.up;
                 uv[z * vSizeX + x] = new Vector2((float)x / sizeX, (float)z / sizeZ);
             }

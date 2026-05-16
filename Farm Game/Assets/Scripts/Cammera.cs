@@ -7,7 +7,7 @@ public class Cammer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        offset = new Vector3(1, 15.3f, -7);
+        offset = new Vector3(1, 15.3f, -9);
         transform.position = player.transform.position + offset;
     }
 }
