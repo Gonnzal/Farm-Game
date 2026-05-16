@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 1119023423}
   - component: {fileID: 1119023422}
   - component: {fileID: 1119023427}
+  - component: {fileID: 1119023428}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -702,6 +703,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedWalk: 50
   speedRun: 70
+--- !u!114 &1119023428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119023421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 2b5eedbac68d9dd44a1e6847202b4a08, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8350131d-9e0e-4e3b-9e1a-d8b91e12f500
+    m_ActionName: 'KeyboardAndMouse/North[/Keyboard/w]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 028c11fa-e710-4dd7-bb16-7f50408a8eeb
+    m_ActionName: 'KeyboardAndMouse/South[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9262c88a-4af2-47e3-b125-423c877af426
+    m_ActionName: 'KeyboardAndMouse/East[/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c81fc03b-7844-49e2-942a-51ccdb6e4547
+    m_ActionName: 'KeyboardAndMouse/West[/Keyboard/a]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f1234567-89ab-cdef-0123-456789abcdef
+    m_ActionName: 'KeyboardAndMouse/Sprint[/Keyboard/leftShift]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: KeyboardAndMouse
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 330585545}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

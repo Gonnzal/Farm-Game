@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,32 +16,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = speedRun;
-        }
-        else
-        {
-            speed = speedWalk;
-        }
-        if(Input.GetKey(KeyCode.W))
-        {
-            rb.MovePosition(transform.position + Vector3.forward * speed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            rb.MovePosition(transform.position - Vector3.forward * speed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            rb.MovePosition(transform.position - Vector3.right * speed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            rb.MovePosition(transform.position + Vector3.right * speed * Time.deltaTime);
-        }
-
+        speed = Input.GetKey(KeyCode.LeftShift) ? speedRun : speedWalk;
+        
         Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        transform.rotation = Quaternion.LookRotation(moveDirection);
+        
+        if(moveDirection.magnitude > 0)
+        {
+            rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(moveDirection);
+        }
     }
 }
