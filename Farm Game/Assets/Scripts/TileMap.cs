@@ -4,9 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer)), RequireComponent(typeof(MeshCollider))]
 public class TileMap : MonoBehaviour
 {
-    [SerializeField] int sizeX;
-    [SerializeField] int sizeZ;
-    [SerializeField] float tileSize;
+    public int sizeX;
+    public int sizeZ;
+    public float tileSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,7 +14,7 @@ public class TileMap : MonoBehaviour
         BuildMesh(sizeX, sizeZ, tileSize);
     }
 
-    void BuildMesh(int sizeX, int sizeZ, float tileSize)
+    public void BuildMesh(int sizeX, int sizeZ, float tileSize)
     {
         int numTiles = sizeX * sizeZ;
         int numTris = numTiles * 2;
