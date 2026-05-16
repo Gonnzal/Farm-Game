@@ -14,8 +14,10 @@ public class TileMap : MonoBehaviour
         BuildMesh(sizeX, sizeZ, tileSize);
     }
 
+
     public void BuildMesh(int sizeX, int sizeZ, float tileSize)
     {
+        TDMap map = new TDMap(sizeX, sizeZ);
         int numTiles = sizeX * sizeZ;
         int numTris = numTiles * 2;
         
@@ -45,6 +47,13 @@ public class TileMap : MonoBehaviour
         {
             for (x = 0; x < sizeX; x++)
             {
+                Vector3 tileCenter = GetTileCenter(x, z);
+                TDTile tile = new TDTile();
+                tile.posX = tileCenter.x;
+                tile.posY = tileCenter.y;
+                tile.posZ = tileCenter.z;
+                map.tiles[x, z] = tile;
+
                 int squareIndex = z * sizeX + x;
                 int triOffset = squareIndex * 6;
                 triangles[triOffset + 0] = z * vSizeX + x + 0;
@@ -69,6 +78,19 @@ public class TileMap : MonoBehaviour
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
 
         meshFilter.mesh = mesh;
+        meshCollider.sharedMesh = mesh;
+        for (int i = 0; i < map.width; i++)
+        {
+            for(int j = 0; j < map.height; j++)
+            {
+                Debug.Log(map.GetTile(i, j).type);
+            }
+        }
     }
 
+    Vector3 GetTileCenter(float x, float z)
+    {
+        Vector3 center = new Vector3((x + 0.5f) * tileSize, 0, (z + 0.5f) * tileSize); 
+        return center;
+    }
 }
