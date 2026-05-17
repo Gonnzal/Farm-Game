@@ -11,12 +11,14 @@ public class TileMapMouse : MonoBehaviour
     TileMap tilemap;
     //[SerializeField] Transform cube;
     TileMap tm;
+    int offset;
 
     void Start()
     {
         collider = GetComponent<Collider>();
         tilemap = GetComponent<TileMap>();
         tm = GetComponent<TileMap>();
+        offset = Mathf.FloorToInt(tm.sizeZ /2);
     }
     // Update is called once per frame
     void Update()
@@ -26,13 +28,16 @@ public class TileMapMouse : MonoBehaviour
         {
             int x = Mathf.FloorToInt(hit.point.x  / tilemap.tileSize);
             int z = Mathf.FloorToInt(hit.point.z / tilemap.tileSize);
+            x = x + offset;
+            z = z + offset;
             Vector2 tile = new Vector2(x, z);
             Debug.Log(tile);
             //GetComponent<Renderer>().material.color = Color.red;
             //cube.position = new Vector3(tile.x, 0, tile.y) * tilemap.tileSize + new Vector3(tilemap.tileSize, 0, tilemap.tileSize) * 0.5f;
-            if(Input.GetKeyDown(KeyCode.Mouse0))
+            if(Input.GetKeyDown(KeyCode.Mouse0) && tm.map.tiles[x, z].type != TDTile.TILE_FARMLAND)
             {
                 tm.map.tiles[x, z].type = TDTile.TILE_FARMLAND;
+                Debug.LogWarning(tm.map.tiles[x, z].type);
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cube.transform.position = new Vector3(tm.map.tiles[x, z].posX, 0, tm.map.tiles[x, z].posZ);
             }

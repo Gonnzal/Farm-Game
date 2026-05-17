@@ -112,6 +112,7 @@ public class TileMap : MonoBehaviour
                 if(spawn < 5)
                 {
                     spawnedObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    map.tiles[x, z].type = TDTile.TILE_FARMLAND;
                 }
                 else if(spawn > 50 && spawn < 55)
                 {
@@ -124,9 +125,11 @@ public class TileMap : MonoBehaviour
 
                 if(spawnedObject != null)
                 {
-                    spawnedObject.GetComponent<Collider>().isTrigger = true;
+                    //pawnedObject.GetComponent<Collider>().isTrigger = true;
                     spawnedObject.transform.SetParent(transform);
+                    map.tiles[x, z].obstacle = true;
                     spawnedObject.transform.localPosition = new Vector3(map.tiles[x, z].posX, 0 + spawnedObject.GetComponent<Collider>().bounds.size.y * 0.5f, map.tiles[x, z].posZ);
+                    spawnedObject.transform.rotation = Quaternion.Euler(0, 45, 0);
                 }
             }
         }
