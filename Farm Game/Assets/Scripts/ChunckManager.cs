@@ -8,6 +8,7 @@ public class ChunckManager : MonoBehaviour
     [SerializeField] GameObject chunk;
     List <GameObject> generated = new List<GameObject>();
     List <Vector3> positions = new List<Vector3>();
+    List <GameObject> temporal = new List<GameObject>();
     [SerializeField] float recalculate;
     [SerializeField] float activationDistance;
     float offset;
@@ -20,6 +21,7 @@ public class ChunckManager : MonoBehaviour
         offset = temp.GetComponent<TileMap>().sizeX * temp.GetComponent<TileMap>().tileSize;
         generated.Add(temp);
         positions.Add(temp.transform.position);
+        temp.transform.SetParent(transform);
         Check();
         currentTime = 0;
     }
@@ -58,8 +60,9 @@ public class ChunckManager : MonoBehaviour
                     else
                     {
                         temp = Instantiate(chunk, pos, Quaternion.Euler(0, 0, 0));
-                        generated.Add(temp);
+                        temporal.Add(temp);
                         positions.Add(temp.transform.position);
+                        temp.transform.SetParent(transform);
                     }
                 }
             }
@@ -73,6 +76,11 @@ public class ChunckManager : MonoBehaviour
                 obj.SetActive(true);
             }
         }
+        for(int i = 0; i < temporal.Count; i++)
+        {
+            generated.Add(temporal[i]);
+        }
+        temporal.Clear();
     }
 
     float Distance(Vector3 player, Vector3 chunk)

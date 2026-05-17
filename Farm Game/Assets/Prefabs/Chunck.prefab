@@ -127,6 +127,7 @@ MonoBehaviour:
   sizeX: 30
   sizeZ: 30
   tileSize: 1
+  groundMat: {fileID: 2100000, guid: 1f99e249be7be2942b200df0f7f487ba, type: 2}
 --- !u!1839735485 &717654739720229251
 Tilemap:
   m_ObjectHideFlags: 0

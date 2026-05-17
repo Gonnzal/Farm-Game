@@ -28,7 +28,7 @@ public class TileMapMouse : MonoBehaviour
             int z = Mathf.FloorToInt(hit.point.z / tilemap.tileSize);
             Vector2 tile = new Vector2(x, z);
             Debug.Log(tile);
-            GetComponent<Renderer>().material.color = Color.red;
+            //GetComponent<Renderer>().material.color = Color.red;
             //cube.position = new Vector3(tile.x, 0, tile.y) * tilemap.tileSize + new Vector3(tilemap.tileSize, 0, tilemap.tileSize) * 0.5f;
             if(Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -39,7 +39,7 @@ public class TileMapMouse : MonoBehaviour
         }
         else
         {
-            GetComponent<Renderer>().material.color = Color.white;
+            //GetComponent<Renderer>().material.color = Color.white;
         }
     }
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -8,6 +9,7 @@ public class TileMap : MonoBehaviour
     public int sizeZ;
     public float tileSize;
     public TDMap map;
+    public Material groundMat;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,9 +52,9 @@ public class TileMap : MonoBehaviour
             {
                 Vector3 tileCenter = GetTileCenter(x, z);
                 TDTile tile = new TDTile();
-                tile.posX = tileCenter.x;
+                tile.posX = tileCenter.x - sizeX * 0.5f;
                 tile.posY = tileCenter.y;
-                tile.posZ = tileCenter.z;
+                tile.posZ = tileCenter.z - sizeZ * 0.5f;
                 map.tiles[x, z] = tile;
 
                 int squareIndex = z * sizeX + x;
@@ -80,6 +82,7 @@ public class TileMap : MonoBehaviour
 
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
+        meshRenderer.material = groundMat;
         for (int i = 0; i < map.width; i++)
         {
             for(int j = 0; j < map.height; j++)
@@ -87,11 +90,45 @@ public class TileMap : MonoBehaviour
                 Debug.Log(map.GetTile(i, j).type);
             }
         }
+        PopulateChunk();
     }
 
     Vector3 GetTileCenter(float x, float z)
     {
         Vector3 center = new Vector3((x + 0.5f) * tileSize, 0, (z + 0.5f) * tileSize); 
         return center;
+    }
+
+    void PopulateChunk()
+    {
+        int spawn;
+        GameObject spawnedObject;
+
+        for(int x = 0; x < sizeX; x++)
+        {
+            for(int z = 0; z < sizeZ; z++)
+            {
+                spawn = Random.Range(0, 101);
+                if(spawn < 5)
+                {
+                    spawnedObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                }
+                else if(spawn > 50 && spawn < 55)
+                {
+                    spawnedObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                }
+                else
+                {
+                    spawnedObject = null;
+                }
+
+                if(spawnedObject != null)
+                {
+                    spawnedObject.GetComponent<Collider>().isTrigger = true;
+                    spawnedObject.transform.SetParent(transform);
+                    spawnedObject.transform.localPosition = new Vector3(map.tiles[x, z].posX, 0 + spawnedObject.GetComponent<Collider>().bounds.size.y * 0.5f, map.tiles[x, z].posZ);
+                }
+            }
+        }
     }
 }
